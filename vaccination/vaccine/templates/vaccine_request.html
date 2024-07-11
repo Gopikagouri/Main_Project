@@ -1,0 +1,63 @@
+{% extends "staffhead.html" %}
+
+{% block content %}
+<script>
+    $(document).ready(function() {
+        $('#vaccine_name').change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var selectedDetails = selectedOption.val().split('::');
+    
+            var name = selectedDetails[1];
+            var description = selectedDetails[2];
+            var composition = selectedDetails[3];
+            var pharmaceuticalForm = selectedDetails[4];
+    
+            // Update HTML to display the details without HTML tags
+            $('#vaccine_details').html(
+                '<p>Name: ' + name + '</p>' +
+                '<p>Description: ' + description + '</p>' +
+                '<p>Composition: ' + composition + '</p>' +
+                '<p>Pharmaceutical Form: ' + pharmaceuticalForm + '</p>'
+                // Add other details as needed
+            );
+        });
+    });
+    
+</script>
+
+<form method="post" onsubmit="return validateForm()" action="{% url 'vaccine_request_submit' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table table-responsive table-striped">
+        <tr>
+            <input type="hidden" name="manufacturer_id" id="manufacturer_id" value="{{ manufacturer_id }}">
+
+            <td>Vaccine Name</td>
+            <td>
+                <select name="vaccine_name" id="vaccine_name" class="form-control" required>
+                    <option value="">Select Vaccine</option>
+                    {% for medicine in medicines %}
+                        <option value="{{ medicine.med_id }}" data-toggle="tooltip" title="Name: {{ medicine.name }}&#10;Description: {{ medicine.description }}&#10;Composition: {{ medicine.composition }}&#10;Pharmaceutical Form: {{ medicine.pharmaceutical_form }}">
+                            {{ medicine.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td><input type="date" name="date" id="date" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td>Required Document</td>
+            <td><input type="file" id="required_documents" name="required_documents" accept=".doc, .docx, .pdf, .txt" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td>Additional Details</td>
+            <td><textarea name="additional_details" id="additional_details" class="form-control" required></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="submit" value="Submit" class="btn btn-lg btn-success"></td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

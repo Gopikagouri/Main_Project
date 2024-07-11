@@ -1,0 +1,136 @@
+{% extends "hosphead.html" %}
+
+{% block content %}
+<script>
+    function validateForm() {
+        var vaccineName = document.getElementById("vaccine_name").value;
+        var date = document.getElementById("date").value;
+        var documents = document.getElementById("required_documents").value;
+        var additionalDetails = document.getElementById("additional_details").value;
+
+        if (vaccineName == "" || date == "" || documents == "" || additionalDetails == "") {
+            alert("Please fill in all fields.");
+            return false;
+        }
+
+        if (vaccineName == "") {
+            alert("Please select a vaccine.");
+            return false;
+        }
+    }
+
+    function updateVaccineId() {
+        var selectedVaccine = document.getElementById("vaccine_name");
+        var selectedVaccineIndex = selectedVaccine.selectedIndex;
+        var selectedVaccineId = selectedVaccine.options[selectedVaccineIndex].value;
+        
+        console.log("Selected Index:", selectedVaccineIndex);  // Debug print
+        console.log("Selected Vaccine ID:", selectedVaccineId);  // Debug print
+        
+        document.getElementById("vaccine_request_id").value = selectedVaccineId;
+    }
+
+    function updateVaccineId() {
+        var selectedVaccine = document.getElementById("vaccine_name");
+        var selectedVaccineIndex = selectedVaccine.selectedIndex;
+        var selectedVaccineId = selectedVaccine.options[selectedVaccineIndex].value;
+        
+        console.log("Selected Index:", selectedVaccineIndex);  // Debug print
+        console.log("Selected Vaccine ID:", selectedVaccineId);  // Debug print
+    
+        // Get the next ID by adding 1 to the selected vaccine ID
+        var nextVaccineId = parseInt(selectedVaccineId);
+        document.getElementById("vaccine_request_id").value = nextVaccineId;
+    
+        console.log("Next Vaccine ID:", nextVaccineId);  // Debug print
+        
+        document.getElementById("vaccine_request_id").value = nextVaccineId;
+    }
+    $(document).ready(function() {
+        $('#vaccine_name').change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var selectedDetails = selectedOption.val().split('::');
+    
+            var name = selectedDetails[1];
+            var description = selectedDetails[2];
+            var composition = selectedDetails[3];
+            var pharmaceuticalForm = selectedDetails[4];
+            var expiryDate = selectedDetails[5];
+            var manufactureDate = selectedDetails[6];
+    
+            // Update HTML to display the details without HTML tags
+            $('#vaccine_details').html(
+                '<p>Name: ' + name + '</p>' +
+                '<p>Description: ' + description + '</p>' +
+                '<p>Composition: ' + composition + '</p>' +
+                '<p>Pharmaceutical Form: ' + pharmaceuticalForm + '</p>' +
+                '<p>Expiry Date: ' + expiryDate + '</p>' +
+                '<p>Manufacture Date: ' + manufactureDate + '</p>'
+                // Add other details as needed
+            );
+        });
+    });
+</script>
+
+<form method="post" onsubmit="return validateForm()" action="{% url 'book_vaccine_request' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table table-responsive table-striped">
+        <tr>
+            <input type="hidden" name="hospital_id" id="hospital_id" value="{{ hospital_id }}">
+            <input type="hidden" name="vaccine_request_id" id="vaccine_request_id" value="{{ selected_vaccine_id }}">
+            
+            <td>Vaccine Name</td>
+            <td>
+                <select name="vaccine_name" id="vaccine_name" class="form-control" onchange="updateVaccineId()" required>
+                    <option value="">Select Vaccine</option>
+                    {% for request in vaccine_requests %}
+                    <option value="{{ request.medicine.med_id }}" {% if request.medicine.med_id == selected_vaccine_id %}selected{% endif %} data-toggle="tooltip" title="Name: {{ request.medicine.name }}&#10;Description: {{ request.medicine.description }}&#10;Composition: {{ request.medicine.composition }}&#10;Pharmaceutical Form: {{ request.medicine.pharmaceutical_form }}">
+                        <p class="abc"><b>{{ request.medicine.name }}</b></p>
+                        {% for expiry_detail in request.expiry_set.all %}
+                            {% if expiry_detail %}
+                                {% with expiry_detail.exp_date as expiryDate %}
+                                    {% with expiry_detail.mfg_date as manufactureDate %}
+                                        {% if expiryDate and manufactureDate %}
+                                        <p></p>
+                                        <p></p>
+                                            <p class="date-info">-(Manufactured Date: {{ manufactureDate }}-</p>
+                                            <p class="date-info">Expiry Date: {{ expiryDate }})</p>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endfor %}
+                    </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Stock</td>
+            <td><input type="text" name="stock" id="required_documents" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td><input type="text" name="phone_number" id="phone_number" class="form-control" required></td>
+        </tr>
+        <tr>
+            <td>Additional Details</td>
+            <td><textarea name="additional_details" id="additional_details" class="form-control" required>{{ selected_vaccine_request.additional_details }}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" name="submit" value="Submit" class="btn btn-lg btn-success"></td>
+        </tr>
+    </table>
+</form>
+<style>
+  .abc {
+        font-size: 18px; /* Adjust font size as needed */
+        font-weight: bold; /* Adjust font weight as needed */
+   }
+
+   .date-info {
+        margin-bottom: 10px; /* Add margin bottom to create space between dates */
+   }
+</style>
+{% endblock %}

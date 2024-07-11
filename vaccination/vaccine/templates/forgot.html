@@ -1,0 +1,77 @@
+{% extends "indexhead.html" %}
+
+{% block content %}
+ <script>
+     function val(x)
+     {
+      var alp=/^[a-zA-Z]+$/
+   var num=/^[0-9]+$/
+           if(!x.t1.value.match(alp))
+        {
+            alert('must fill a valid name');
+            x.t1.focus();
+            x.t1.value="";
+            return false
+        }
+
+              if(!x.t2.value.match(alp))
+        {
+            alert('must fill a valid name');
+            x.t2.focus();
+            x.t2.value="";
+            return false
+        }
+         if(!x.t6.value.match(num))
+           {
+            alert('must fill a valid phone no');
+            x.t5.focus();
+            x.t5.value="";
+            return false
+        }else if(x.t6.value.length!=10){
+         alert('must fill a 10 digits');
+            x.t6.focus();
+            x.t6.value="";
+            return false
+        }
+        if(x.t7.value!=x.t8.value)
+           {
+            alert('password miss match');
+            x.t7.focus();
+            x.t7.value="";
+              x.t78.value="";
+            return false
+        }
+     }
+
+ </script>
+ <div class="panel panel-skin">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><span class="fa fa-pencil-square-o"></span>Forgot Password </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="sendmessage">Your message has been sent. Thank you!</div>
+                      <div id="errormessage"></div>
+
+                      <form   action="{% url 'forgot' %}" method="post" role="form" >
+                         {% csrf_token %}
+                         
+
+                        <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input type="email" required name="t1" id="email" class="form-control input-md" data-rule="email" data-msg="Please enter a valid email">
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                         
+                        </div>
+                    
+                        <input type="submit" value="Send" class="btn btn-skin btn-block btn-lg">
+
+                        <p class="lead-footer">Password send to your registered Email</p>
+
+                      </form>
+                    </div>
+                  </div>
+ {% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'adminhead.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+      .highlighted {
+        background-color: #BDFCC9 !important;
+    }
+      .shaking {
+          animation: shake 0.5s infinite; 
+      }
+      @keyframes shake {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(5px); }w
+          50% { transform: translateX(0); }
+          75% { transform: translateX(-5px); }
+          100% { transform: translateX(0); }
+      }
+  </style>
+</head>
+<body>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Distributor Name</th>
+            <th>Address</th>
+            
+            <th>Phone</th>
+            <th>Actions</th> 
+               
+                
+              
+                
+            </tr>
+          </thead>
+          <body>
+           
+            {% for i in c %}
+            <tr {% if i.status == "waiting" %}class="highlighted shaking"{% endif %}>
+                <td>{{i.distributor_name}}</td>
+                <td>{{i.address}}</td>
+                <td>{{i.phone}}</td>
+                <td>
+               
+                  {% if i.status == "waiting" %}
+    
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsModal{{ i.distributor_id }}">
+              View Details
+          </button>
+      {% else %}
+        
+          {{ i.status }}
+      {% endif %}
+              </td>
+          </tr>
+        
+          <div class="modal fade" id="detailsModal{{ i.distributor_id }}" tabindex="-1" aria-labelledby="detailsModalLabel{{ i.distributor_id }}" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="detailsModalLabel{{ i.distributor_id }}">Details for {{ i.company_name }}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- Display details here -->
+                          <p>Distributor Name: {{ i.distributor_name }}</p>
+                          <p>Address: {{ i.address }}</p>
+                          <p>Phone: {{ i.phone }}</p>
+                         
+                      </div>
+                      <div class="modal-footer">
+                          <!-- Buttons for approval/rejection -->
+                          <form action="{% url 'approve_distributor' i.distributor_id %}" method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-success">Approve</button>
+                          </form>
+                          <form action="{% url 'reject_distributor' i.distributor_id %}" method="POST">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger">Reject</button>
+                          </form>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </tbody>
+      </table>
+</body>
+{% endblock %}
+
+

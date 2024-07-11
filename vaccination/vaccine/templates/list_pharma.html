@@ -1,0 +1,42 @@
+{% extends "adminhead.html" %}
+
+{% block content %}
+
+<table class="table table-striped table-responsive">
+    <tr>
+        <td>Sl.No.</td>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>Address</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>Qualification</td>
+        <td>Designation</td>
+        <td>Photo</td>
+<td>Action</td>
+    </tr>
+
+    {% for datas in tutor %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{datas.PhramaStaff_name}}</td>
+        <td>{{datas.PhramaStaff_gender}}</td>
+        <td>{{datas.PhramaStaff_address}}</td>
+        <td>{{datas.PhramaStaff_email}}</td>
+        <td>{{datas.PhramaStaff_phone}}</td>
+        <td>{{datas.PhramaStaff_qualification}}</td>
+        <td>{{datas.PhramaStaff_designation}}</td>
+        <td><img src="/media/{{datas.PhramaStaff_photo}}" height="100px"/></td>
+<td>
+            {% if datas.PhramaStaff_status == "approved" %}
+            <a href="{% url 'deletePhrama'%}?id={{datas.PhramaStaff_id}}&log={{datas.Staff_logid.log_id}}">Remove</a>
+            {% endif %}
+
+          </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+{% endblock %}
+    <!--data goes in between-->

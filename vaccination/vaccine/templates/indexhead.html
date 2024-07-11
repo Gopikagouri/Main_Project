@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+ {% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Vaccine supply chain management through blockchain technology</title>
+
+  <!-- css -->
+  <link href="{% static 'medicio/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'medicio/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="{% static 'medicio/plugins/cubeportfolio/css/cubeportfolio.min.css' %}">
+  <link href="{% static 'medicio/css/nivo-lightbox.css' %}" rel="stylesheet" />
+  <link href="{% static 'medicio/css/nivo-lightbox-theme/default/default.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'medicio/css/owl.carousel.css' %}" rel="stylesheet" media="screen" />
+  <link href="{% static 'medicio/css/owl.theme.css' %}" rel="stylesheet" media="screen" />
+  <link href="{% static 'medicio/css/animate.css' %}" rel="stylesheet" />
+  <link href="{% static 'medicio/css/style.css' %}" rel="stylesheet">
+
+  <!-- boxed bg -->
+  <link id="bodybg" href="{% static 'medicio/bodybg/bg1.css' %}" rel="stylesheet" type="text/css" />
+  <!-- template skin -->
+  <link id="t-colors" href="{% static 'medicio/color/default.css' %}" rel="stylesheet">
+ {% if msg != ""%}
+       <script>alert("{{msg}}");</script>
+  {% endif %}
+  <!-- =======================================================
+    Theme Name: Medicio
+    Theme URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+  <div id="wrapper">
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="top-area">
+        <div class="container">
+          <!--<div class="row">
+            <div class="col-sm-6 col-md-6">
+              <p class="bold text-left">Monday - Saturday, 8am to 10pm </p>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <p class="bold text-right">Call us now +62 008 65 001</p>
+            </div>
+          </div>-->
+        </div>
+      </div>
+      <div class="container navigation">
+
+        <div class="navbar-header page-scroll">
+          <h1 style="font-size:2.5em; text-align:center; color:#333; margin-bottom:0.5em;">
+            <b>BLOCKVAX</b>
+          </h1>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'Index' %}">Home</a></li>
+            <li><a href="{% url 'manufacture' %}">Register Manufacturer</a></li>
+            <li><a href="{% url 'distributor' %}">Register Distributor</a></li>
+            <li><a href="{% url 'hospital' %}">Register Hospital</a></li>
+
+
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+
+    <!-- Section: intro -->
+    <section id="intro" class="intro">
+      <div class="intro-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="wow fadeInDown" data-wow-offset="0" data-wow-delay="0.1s">
+                <h2 class="h-ultra">BlockVax: Securing Vaccine Supply Chains</h2>
+              </div>
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.1s">
+                <h4 class="h-light">Provide <span class="color">the best  </span> for you</h4>
+              </div>
+              <div class="well well-trans">
+                <div class="wow fadeInRight" data-wow-delay="0.1s">
+
+                  <ul class="lead-list">
+                    <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Decentralized Vaccine Tracking System</strong><br />Implement a decentralized system for tracking vaccine batches throughout the supply chain.</span></li>
+                    <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Data Integrity Assurance</strong><br />Guarantee the integrity of vaccine-related data by leveraging blockchain's immutable nature.</span></li>
+                    <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>User-Friendly Interface and Accessibility</strong><br />Design a user-friendly interface that facilitates easy access to vaccine-related information for all stakeholders.</span></li>
+                    <li><span class="fa fa-check fa-2x icon-success"></span> <span class="list"><strong>Counterfeit Prevention Strategies</strong><br />Deploy strategies to mitigate the risk of counterfeit vaccines infiltrating the supply chain.</span></li>
+                    
+                  
+                  
+                  </ul>
+
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-lg-6">
+              <div class="form-wrapper">
+                <div class="wow fadeInRight" data-wow-duration="2s" data-wow-delay="0.2s">
+
+                   {% block content %}{% endblock %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- /Section: intro -->
+
+    <!-- Section: boxes -->
+    <section id="boxes" class="home-section paddingtop-80">
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-md-4">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+              <div class="box text-center">
+
+                <i class="fa fa-check fa-3x circled bg-skin"></i>
+                <h4 class="h-bold">Track Vaccine Movements</h4>
+                <p> </p></div>
+                  Monitor the movement of vaccines throughout the supply chain seamlessly. Our blockchain-based platform allows stakeholders to track vaccines from production facilities to distribution centers and healthcare providers in real-time, ensuring transparency and accountability at every step.
+               
+            </div>
+          </div>
+          <!--<div class="col-sm-3 col-md-3">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+              <div class="box text-center">
+
+                <i class="fa fa-list-alt fa-3x circled bg-skin"></i>
+                <h4 class="h-bold">Choose your package</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, nec te mollis utroque honestatis, ut utamur molestiae vix, graecis eligendi ne.
+                </p>
+              </div>
+            </div>
+          </div>-->
+          <div class="col-sm-4 col-md-4">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+              <div class="box text-center">
+                <i class="fa fa-user-md fa-3x circled bg-skin"></i>
+                <h4 class="h-bold">Blockchain-Powered Authentication Assistance</h4>
+                <p> </p></div>
+                  Benefit from specialized assistance in authenticating vaccine supply chain data through blockchain technology. Our team provides comprehensive support in leveraging blockchain features to ensure the integrity and transparency of vaccine records.
+                
+              
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4">
+            <div class="wow fadeInUp" data-wow-delay="0.2s">
+              <div class="box text-center">
+
+                <i class="fa fa-hospital-o fa-3x circled bg-skin"></i>
+                <h4 class="h-bold">Data Integrity Assurance Services</h4>
+                <p>
+                  
+                </p>
+              </div>Ensure the integrity of vaccine supply chain data with our dedicated services. Leveraging blockchain technology, we implement robust measures to safeguard vaccine-related information from tampering and unauthorized access.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- /Section: boxes -->
+
+
+
+
+
+    <!-- Section: services -->
+    
+
+    <!-- /Section: services -->
+
+
+
+
+
+
+    <!-- Section: works -->
+    <section id="facilities" class="home-section paddingbot-60">
+      <div class="container marginbot-50">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+
+            <div class="divider-short"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="wow bounceInUp" data-wow-delay="0.2s">
+              <div id="owl-works" class="owl-carousel">
+                <div class="item"><a href="{% static 'medicio/img/dummy/vaccine.jpeg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/1@2x.jpg' %}"><img src="{% static 'medicio/img/dummy/vaccine1.jpg ' %}" class="img-responsive" alt="img"></a></div>
+                <div class="item"><a href="{% static 'medicio/img/dummy/animal.jpg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/2@2x.jpg' %}"><img src="{% static 'medicio/img/dummy/animal.jpg ' %}" class="img-responsive " alt="img"></a></div>
+                <div class="item"><a href="{% static 'medicio/img/dummy/covid19.jpg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/3@2x.jpg' %}"><img src="{% static 'medicio/img/dummy/covid19.jpg ' %}" class="img-responsive " alt="img"></a></div>
+                <div class="item"><a href="{% static 'medicio/img/dummy/vaccine2.jpeg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/4@2x.jpg' %}"><img src="{% static 'medicio/img/dummy/vaccine2.jpeg ' %}" class="img-responsive " alt="img"></a></div>
+                <div class="item"><a href="{% static 'medicio/img/dummy/vaccine3.jpg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/5@2x.jpg' %}"><img src="{% static 'medicio/img/dummy/vaccine3.jpg ' %}" class="img-responsive " alt="img"></a></div>
+                <div class="item"><a href="{% static 'medicio/img/dummy/vaccine.jpg' %}" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="{% static 'medicio/img/works/6@2x.jpg' %}"><img src="{% static 'medicio/img/photo/6.jpg' %}" class="img-responsive " alt="img"></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Section: works -->
+
+
+
+
+
+    
+
+
+    <!--<footer>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+              <div class="widget">
+                <h5>About Medicio</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, ne nam purto nihil impetus, an facilisi accommodare sea
+                </p>
+              </div>
+            </div>
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+              <div class="widget">
+                <h5>Information</h5>
+                <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Laboratory</a></li>
+                  <li><a href="#">Medical treatment</a></li>
+                  <li><a href="#">Terms & conditions</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+              <div class="widget">
+                <h5>Medicio center</h5>
+                <p>
+                  Nam leo lorem, tincidunt id risus ut, ornare tincidunt naqunc sit amet.
+                </p>
+                <ul>
+                  <li>
+                    <span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-calendar-o fa-stack-1x fa-inverse"></i>
+								</span> Monday - Saturday, 8am to 10pm
+                  </li>
+                  <li>
+                    <span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-phone fa-stack-1x fa-inverse"></i>
+								</span> +62 0888 904 711
+                  </li>
+                  <li>
+                    <span class="fa-stack fa-lg">
+									<i class="fa fa-circle fa-stack-2x"></i>
+									<i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+								</span> hello@medicio.com
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+              <div class="widget">
+                <h5>Our location</h5>
+                <p>The Suithouse V303, Kuningan City, Jakarta Indonesia 12940</p>
+
+              </div>
+            </div>
+            <div class="wow fadeInDown" data-wow-delay="0.1s">
+              <div class="widget">
+                <h5>Follow us</h5>
+                <ul class="company-social">
+                  <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li class="social-google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                  <li class="social-vimeo"><a href="#"><i class="fa fa-vimeo-square"></i></a></li>
+                  <li class="social-dribble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sub-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="wow fadeInLeft" data-wow-delay="0.1s">
+                <div class="text-left">
+                  <p>&copy;Copyright - Medicio Theme. All rights reserved.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="wow fadeInRight" data-wow-delay="0.1s">
+                <div class="text-right">
+                  <div class="credits">
+                    <!--
+                      All the links in the footer should remain intact.
+                      You can delete the links only if you purchased the pro version.
+                      Licensing information: https://bootstrapmade.com/license/
+                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medicio
+                    
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>-->
+
+  </div>
+  <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
+
+  <!-- Core JavaScript Files -->
+  <script src="{% static 'medicio/js/jquery.min.js' %}"></script>
+  <script src="{% static 'medicio/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'medicio/js/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'medicio/js/wow.min.js' %}"></script>
+  <script src="{% static 'medicio/js/jquery.scrollTo.js' %}"></script>
+  <script src="{% static 'medicio/js/jquery.appear.js' %}"></script>
+  <script src="{% static 'medicio/js/stellar.js' %}"></script>
+  <script src="{% static 'medicio/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js' %}"></script>
+  <script src="{% static 'medicio/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'medicio/js/nivo-lightbox.min.js' %}"></script>
+  <script src="{% static 'medicio/js/custom.js' %}"></script>
+  <script src="{% static 'medicio/contactform/contactform.js' %}"></script>
+
+</body>
+
+</html>

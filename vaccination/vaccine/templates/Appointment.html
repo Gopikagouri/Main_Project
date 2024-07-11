@@ -1,0 +1,65 @@
+ {% extends "userhead.html" %}
+
+{% block content %}
+
+
+ <div class="panel panel-skin">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Make an appoinment  <small></small></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="sendmessage">Your message has been sent. Thank you!</div>
+                      <div id="errormessage"></div>
+
+                      <form action="{% url 'Add_Appoint' %}" method="post" role="form" >
+                       <!-- <div class="row">
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>First Name</label>
+                              <input type="text" name="first_name" id="first_name" class="form-control input-md" data-rule="minlen:3" data-msg="Please enter at least 3 chars">
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                          <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                              <label>Last Name</label>
+                              <input type="text" name="last_name" id="last_name" class="form-control input-md" data-rule="minlen:3" data-msg="Please enter at least 3 chars">
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                        </div>-->
+                       {% csrf_token %}
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                              <label>Appointment For</label>
+                              <input type="date" name="t1" id="email" class="form-control input-md" required  data-rule="required" data-msg="The Username is required">
+                              <div class="validation"></div>
+                            </div>
+                          </div></div>
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                              <label>Appointment Time</label>
+                              <input type="time" name="t2" id="phone" required class="form-control input-md" data-rule="required" data-msg="The password is required">
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                        </div>
+<div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                              <label>Purpose of the visit</label>
+                                <textarea name="t3" id="visit" required class="form-control input-md" data-rule="required" data-msg="The password is required"></textarea>
+                              <div class="validation"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="submit" value="Submit" class="btn btn-skin btn-block btn-lg">
+
+                        <p class="lead-footer"><a href="{% url 'SignUp' %}">Booking History</a></p>
+
+                      </form>
+                    </div>
+                  </div>
+ {% endblock %}

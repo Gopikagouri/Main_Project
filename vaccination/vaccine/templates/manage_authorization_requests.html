@@ -1,0 +1,44 @@
+{% extends "disthead.html" %}
+
+{% block content %}
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Vaccine Name</th>
+            <th>Hospital Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Additional details</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in authorization_requests %}
+        <tr>
+            <td>{{ request.vaccinerequest.medicine.name }}</td>
+            <td>{{ request.hospital.hospital_name }}</td>
+            <td>{{ request.hospital.hospital_address }}</td>
+            <td>{{ request.hospital.hospital_phone }}</td>
+            <td><a href="{{ request.additional_details.url }}">{{ request.additional_details }}</a></td>
+            <td>{{ request.status }}</td>
+            <td>
+                {% if request.status == 'Assigned' %}
+                <form method="post" action="{% url 'manage_authorization_requests' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="request_id" value="{{ request.pk }}">
+                    <select name="status" class="form-control">
+                        <option value="approved">Approve</option>
+                        <option value="rejected">Reject</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                {% else %}
+                {{ request.status }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

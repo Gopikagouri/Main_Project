@@ -1,0 +1,58 @@
+{% extends "staffhead.html" %}
+
+{% block content %}
+<table class="table table-responsive table-striped">
+    <thead>
+        <tr>
+            <th>Vaccine Name</th>
+            <th>Date</th>
+            <th>Required Documents</th>
+            <th>Additional Details</th>
+            <th>Action</th>
+           <!-- New column for status -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in vaccine_requests %}
+        <tr>
+            <td>{{ request.vaccine_name }}</td>
+            <td>{{ request.date }}</td>
+            <td><a href="{{ request.required_documents.url }}">{{ request.required_documents }}</a></td>
+            <td>{{ request.additional_details }}</td>
+            <td>
+                {% if request.status == "waiting" %}
+                    <form method="post" action="{% url 'approve_vaccine_request' request.vaccine_id %}">
+                        {% csrf_token %}
+                        <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                        <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                    </form>
+                {% elif request.status == "approved" %}
+                
+                            <form method="post" action="{% url 'mark_as_completed' request.medicine_id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="medicine_id" id="vaccineIdInput">
+                            <label for="mfgDateInput">Manufacturing Date:</label>
+                            <input type="date" id="mfgDateInput" name="mfg_date" required><br>
+                            <label for="expDateInput">Expiry Date:</label>
+                            <input type="date" id="expDateInput" name="exp_date" required><br>
+                            <button type="submit" class="btn btn-primary">Mark as complete</button>
+                          </form>
+                       
+                    {% else %}
+                    {{ request.status }}
+                {% endif %}
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    // Function to show the modal and set vaccine ID
+    function showExpiryModal(vaccineId) {
+      $('#vaccineIdInput').val(vaccineId);
+      $('#expiryModal').modal('show');
+    }
+    </script>
+    
+{% endblock %}

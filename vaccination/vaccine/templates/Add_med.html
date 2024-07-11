@@ -1,0 +1,72 @@
+{% extends "staffhead1.html" %}
+
+{% block content %}
+<form method="POST" action="{% url 'Add_med' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <table class="table table-responsive">
+    <tr>
+        <td>
+    Medicine name
+        </td>
+        <td><input type="text" name="t1" class="form-control" /> </td>
+    
+        <td>
+    Medicine pic
+        </td>
+        <td><input type="file" name="t2" class="form-control" /> </td>
+    </tr>
+    <tr>
+        <td>
+    Medicine company
+        </td>
+        <td><input type="text" name="t3" class="form-control" /> </td>
+    
+        <td>
+    Medicine Expiry date
+        </td>
+        <td><input type="date" name="t4" class="form-control" /> </td>
+    </tr>
+    <tr>
+        <td>
+    Medicine Price
+        </td>
+        <td><input type="text" name="t5" class="form-control" /> </td>
+    
+        <td>
+    Medicine Stock
+        </td>
+        <td><input type="text" name="t6" class="form-control" /> </td>
+    </tr>
+    <tr>
+        <td>
+    Medicine Type
+        </td>
+        <td><select name="t7" class="form-control" required>
+            <option value="">-select-</option>
+            <option>caps</option>
+            <option>tonic</option>
+            <option>Drops</option>
+            <option>vaxicn</option>
+            <option>Cream</option>
+            <option>oil</option>
+            <option>Powder</option>
+    
+        </select> </td>
+    
+        <td>
+    Medicine unit
+        </td>
+        <td><input type="text" name="t8" class="form-control" /> </td>
+    </tr>
+    <tr>
+        <td colspan="4"> <input type="submit" class="btn btn-success" name="b1" style="float: right;"> </td>
+    </tr>
+    </table>
+    
+    
+    
+    </form>
+
+    {% endblock %}
+    

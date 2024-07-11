@@ -1,0 +1,59 @@
+{% extends "adminhead.html" %}
+
+{% block content %}
+<script>
+    function val(x) {
+        var alp = /^[a-zA-Z\s]+$/;
+        var num = /^[0-9]+$/;
+        if (!x.name.value.match(alp)) {
+            alert('Please enter a valid name');
+            x.name.focus();
+            x.name.value = "";
+            return false;
+        }
+        
+        
+    }
+</script>
+<form method="post" onsubmit="return val(this)" action="{% url 'Add_med' %}" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <table class="table table-responsive table-striped">
+        <tr>
+            <td>Name</td>
+            <td><input type="text" name="name" placeholder="Name" required class="form-control" /></td>
+
+            <td>Description</td>
+            <td><textarea name="description" placeholder="Description" required class="form-control"></textarea></td>
+        </tr>
+       
+        <tr>
+            <td>Composition</td>
+            <td><input type="text" name="composition" placeholder="Composition" required class="form-control" /></td>
+
+            <td>Pharmaceutical Form</td>
+            <td><input type="text" name="pharmaceutical_form" placeholder="Pharmaceutical Form" required class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>Age Limit</td>
+            <td><input type="text" name="age" placeholder="Age limit" required class="form-control" /></td>
+
+            <td>Method of Administration</td>
+            <td><textarea name="method_of_administration" placeholder="Method of Administration" required class="form-control"></textarea></td>
+        </tr>
+        <tr>
+            <td>Contraindications</td>
+            <td><input type="text" name="contraindications" required placeholder="Contraindications" class="form-control" /></td>
+
+            <td>Precautions</td>
+            <td><textarea name="precautions" placeholder="Precautions" required class="form-control"></textarea></td>
+        </tr>
+       
+        <tr>
+            <td colspan="4"><input type="submit" name="b1" value="Submit" class="btn btn-lg btn-success" /></td>
+        </tr>
+      
+        
+    </table>
+</form>
+{% endblock %}
